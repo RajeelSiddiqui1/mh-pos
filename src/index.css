@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Material 3 Color Palette */
+  --color-primary: #0052FF;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #DBE1FF;
+  --color-on-primary-container: #00174B;
+
+  --color-secondary: #5B5D72;
+  --color-on-secondary: #FFFFFF;
+
+  --color-surface: #F3F6FF;
+  --color-on-surface: #1B1B1F;
+  --color-surface-variant: #E1E2EC;
+  --color-on-surface-variant: #44474F;
+
+  --color-dark-surface: #1A1C1E;
+  --color-dark-on-surface: #E3E2E6;
+  --color-dark-surface-variant: #44474F;
+  --color-dark-on-surface-variant: #C4C6D0;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* M3 Elevations */
+  --shadow-m3-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+  --shadow-m3-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+  --shadow-m3-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply font-sans antialiased transition-colors duration-300 bg-surface text-on-surface;
+  }
+
+  .dark body {
+    @apply bg-dark-surface text-dark-on-surface;
+  }
+}
+
+
+
+/* Material Design Utility Classes */
+.m3-card {
+  @apply rounded-[28px] p-6 transition-all duration-300;
+  background-color: var(--color-surface-variant);
+  box-shadow: var(--shadow-m3-1);
+}
+
+.dark .m3-card {
+  background-color: var(--color-dark-surface-variant);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.m3-card:hover {
+  box-shadow: var(--shadow-m3-2);
+}
+
+.glass-morphism {
+  @apply backdrop-blur-lg border border-white/20 shadow-m3-1;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .glass-morphism {
+  @apply bg-black/40 border-white/5 shadow-2xl;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-blue;
+}
+
+.dark .text-gradient {
+  @apply from-white to-gray-400;
+}
+
+input,
+textarea {
+  @apply bg-surface border border-on-surface-variant/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all;
+}
+
+.dark input,
+.dark textarea {
+  @apply bg-dark-surface border-white/10;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+.btn-primary {
+  @apply bg-primary text-on-primary px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-m3-1 hover:shadow-m3-2;
+}
+
+.btn-outline {
+  @apply border border-primary/30 text-primary px-8 py-3 rounded-full font-bold transition-all hover:bg-primary/5;
+}
+
+.dark .btn-outline {
+  @apply border-white/20 text-white hover:bg-white/5;
+}
