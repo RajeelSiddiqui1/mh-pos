@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingBag, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,7 +12,6 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Shop', path: '/shop' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -48,10 +47,6 @@ const Navbar = () => {
               <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-white/5 dark:text-white transition-all">
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <Link to="/shop" className="p-2 rounded-full hover:bg-white/5 dark:text-white relative">
-                <ShoppingBag size={20} />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
-              </Link>
               <Link to="/contact" className="btn-primary py-2 px-5">
                 Quote
               </Link>
@@ -97,12 +92,8 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 px-3 flex justify-between items-center">
-                <Link to="/shop" className="flex items-center space-x-2 dark:text-white font-medium">
-                  <ShoppingBag size={20} />
-                  <span>Cart</span>
-                </Link>
-                <Link to="/contact" className="btn-primary" onClick={() => setIsOpen(false)}>
+              <div className="pt-4 px-3 flex justify-end items-center">
+                <Link to="/contact" className="btn-primary w-full text-center" onClick={() => setIsOpen(false)}>
                   Get a Quote
                 </Link>
               </div>

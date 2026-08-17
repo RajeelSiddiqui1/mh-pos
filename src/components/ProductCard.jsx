@@ -1,6 +1,7 @@
 import React from 'react';
-import { ShoppingCart, Info } from 'lucide-react';
+import { ArrowRight, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ name, price, category, image, description }) => {
   return (
@@ -33,17 +34,16 @@ const ProductCard = ({ name, price, category, image, description }) => {
         </div>
         
         <div className="flex gap-2 pt-2">
-          <button className="flex-1 btn-primary py-2.5 flex items-center justify-center space-x-2 text-sm">
-            <ShoppingCart size={18} />
-            <span>Add to Cart</span>
-          </button>
-          <button className="w-12 h-11 border border-on-surface-variant/20 dark:border-white/10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+          <Link to="/contact" className="flex-1 btn-primary py-2.5 flex items-center justify-center space-x-2 text-sm text-center">
+            <span>Get a Quote</span>
+            <ArrowRight size={16} />
+          </Link>
+          <Link to="/contact" className="w-12 h-11 border border-on-surface-variant/20 dark:border-white/10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
             <Info size={18} />
-          </button>
+          </Link>
         </div>
       </div>
     </motion.div>
-
   );
 };
 

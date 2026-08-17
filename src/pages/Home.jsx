@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Zap, Globe, ArrowRight, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
 const Home = () => {
@@ -77,14 +78,14 @@ const Home = () => {
                 transition={{ delay: 0.3 }}
                 className="flex flex-col sm:row items-center justify-center lg:justify-start gap-4"
               >
-                <button className="btn-primary flex items-center space-x-2 px-8 py-4">
+                <Link to="/contact" className="btn-primary flex items-center space-x-2 px-8 py-4">
                   <span>Get Started Now</span>
                   <ArrowRight size={20} />
-                </button>
-                <button className="btn-outline flex items-center space-x-2 px-8 py-4">
+                </Link>
+                <Link to="/services" className="btn-outline flex items-center space-x-2 px-8 py-4">
                   <Play size={20} className="fill-current" />
                   <span>See How it Works</span>
-                </button>
+                </Link>
               </motion.div>
             </div>
             
@@ -117,10 +118,10 @@ const Home = () => {
               <h2 className="text-4xl font-bold dark:text-white text-on-surface mb-4">Top POS Systems</h2>
               <p className="text-on-surface-variant dark:text-dark-on-surface-variant max-w-xl font-medium">Choose from our curated selection of industry-leading hardware designed for every business environment.</p>
             </div>
-            <button className="text-primary font-bold flex items-center space-x-2 hover:translate-x-2 transition-transform">
-              <span>View All Devices</span>
+            <Link to="/contact" className="text-primary font-bold flex items-center space-x-2 hover:translate-x-2 transition-transform">
+              <span>Get Custom Quote</span>
               <ArrowRight size={20} />
-            </button>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -169,12 +170,12 @@ const Home = () => {
               "Joining MHPOS was the best decision for my bakery. The setup was seamless and the support is unmatched." - Sarah, Toronto
             </p>
             <div className="flex flex-col sm:row items-center justify-center gap-6">
-              <button className="btn-primary text-lg px-12 py-5">
+              <Link to="/contact" className="btn-primary text-lg px-12 py-5">
                 Contact Our Experts
-              </button>
-              <button className="text-gray-400 font-bold hover:text-white">
+              </Link>
+              <Link to="/contact" className="text-gray-400 font-bold hover:text-white">
                 Learn more about pricing →
-              </button>
+              </Link>
             </div>
             <div className="mt-16 flex flex-wrap justify-center gap-12 opacity-30 grayscale">
               <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-8" />
