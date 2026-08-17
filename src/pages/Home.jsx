@@ -1,187 +1,306 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Globe, ArrowRight, Play } from 'lucide-react';
+import { Shield, Zap, Globe, ArrowRight, Play, Star, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ProductCard from '../components/ProductCard';
+import Partners from '../components/Partners';
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
 
 const Home = () => {
-  const topProducts = [
+  const features = [
     {
-      name: 'Solo Pro X1',
-      price: '599',
-      category: 'Mobile Solution',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=400',
-      description: 'Ultra-fast wireless processing with all-day battery life and 5G support.'
+      icon: Zap,
+      title: 'High Performance',
+      desc: 'Ultra-low latency processing ensures your checkout lines never slow down.',
     },
     {
-      name: 'Retail Station V3',
-      price: '1299',
-      category: 'Desktop POS',
-      image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=400',
-      description: 'The complete counter-top solution with integrated thermal printer and customer display.'
+      icon: Shield,
+      title: 'Bank-Grade Security',
+      desc: 'Every transaction is encrypted with the latest industry standards to protect your data.',
     },
     {
-      name: 'Mobile Go',
-      price: '299',
-      category: 'Handheld',
-      image: 'https://images.unsplash.com/photo-1556742205-e3b769206c9a?auto=format&fit=crop&q=80&w=400',
-      description: 'Compact Bluetooth reader that pairs perfectly with your tablet or smartphone app.'
-    }
+      icon: Globe,
+      title: 'Born in Canada',
+      desc: 'Headquartered in Toronto, we understand local tax compliance and regulations.',
+    },
   ];
 
-  const features = [
-    { icon: Zap, title: 'High Performance', desc: 'Ultra-low latency processing ensures your checkout lines never slow down.' },
-    { icon: Shield, title: 'Bank-Grade Security', desc: 'Every transaction is encrypted with the latest industry standards to protect your data.' },
-    { icon: Globe, title: 'Born in Canada', desc: 'Headquartered in Toronto, we understand the local tax compliance and regulations.' }
+  const stats = [
+    { value: '5,000+', label: 'Active Merchants' },
+    { value: '99.9%', label: 'Uptime SLA' },
+    { value: '< 0.3s', label: 'Avg. Transaction' },
   ];
 
   return (
-    <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -z-10 animate-pulse" />
+    <div className="pt-20 overflow-hidden">
+
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className="relative py-24 lg:py-36">
+        {/* Ambient blobs */}
+        <div className="blob-primary w-[560px] h-[560px] -top-20 left-1/4 opacity-60" />
+        <div className="blob-indigo w-[400px] h-[400px] top-40 right-0 opacity-50" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 space-y-8 text-center lg:text-left">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism dark:glass-morphism-dark border border-white/10"
-              >
-                <span className="w-2 h-2 bg-primary rounded-full animate-ping" />
-                <span className="text-sm font-medium dark:text-gray-300">Serving Canadian Businesses Coast to Coast</span>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-5xl lg:text-7xl font-bold leading-tight dark:text-white"
-              >
-                Next-Generation <br />
-                <span className="text-primary italic">POS Solutions</span> <br />
-                for Small Businesses.
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-gray-500 max-w-2xl leading-relaxed mx-auto lg:mx-0"
-              >
-                Streamline your operations with our robust, secure, and modern payment terminals designed for the evolving retail landscape.
-              </motion.p>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col sm:row items-center justify-center lg:justify-start gap-4"
-              >
-                <Link to="/contact" className="btn-primary flex items-center space-x-2 px-8 py-4">
-                  <span>Get Started Now</span>
-                  <ArrowRight size={20} />
-                </Link>
-                <Link to="/services" className="btn-outline flex items-center space-x-2 px-8 py-4">
-                  <Play size={20} className="fill-current" />
-                  <span>See How it Works</span>
-                </Link>
-              </motion.div>
-            </div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, type: 'spring' }}
-              className="flex-1 relative"
+
+            {/* Left — Copy */}
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              animate="visible"
+              className="flex-1 space-y-8 text-center lg:text-left"
             >
-              <div className="relative z-10 p-4 glass-morphism dark:glass-morphism-dark rounded-[3rem] rotate-3 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=800" 
-                  alt="POS Solution" 
-                  className="rounded-[2.5rem]"
+              {/* Badge */}
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism dark:glass-morphism-dark">
+                <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
+                <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Serving Canadian Businesses Coast to Coast
+                </span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                variants={fadeUp}
+                className="text-5xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white"
+              >
+                Next-Generation
+                <br />
+                <span className="text-gradient-blue">POS Solutions</span>
+                <br />
+                for Small Business.
+              </motion.h1>
+
+              {/* Subtext */}
+              <motion.p
+                variants={fadeUp}
+                className="text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed mx-auto lg:mx-0"
+              >
+                Streamline your operations with our robust, secure, and modern payment terminals — designed for the evolving retail landscape.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                variants={fadeUp}
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
+              >
+                <Link to="/contact" className="btn-emerald px-8 py-4 text-base">
+                  <span>Get Started Now</span>
+                  <ArrowRight size={18} />
+                </Link>
+                <Link to="/services" className="btn-outline px-8 py-4 text-base">
+                  <Play size={17} className="fill-current" />
+                  <span>See How It Works</span>
+                </Link>
+              </motion.div>
+
+              {/* Stats row */}
+              <motion.div
+                variants={fadeUp}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-2"
+              >
+                {stats.map(({ value, label }) => (
+                  <div key={label} className="text-center lg:text-left">
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{value}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{label}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right — Hero Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.88 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, type: 'spring', stiffness: 80 }}
+              className="flex-1 relative max-w-lg w-full"
+            >
+              <div className="animate-float pos-card p-4 rounded-[2.5rem] shadow-lift">
+                <img
+                  src="/images/clover-station-duo.jpg"
+                  alt="POS Terminal"
+                  className="rounded-[2rem] w-full"
                 />
               </div>
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/30 blur-3xl rounded-full -z-10" />
+
+              {/* Floating trust badge */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+                className="absolute -bottom-5 -left-6 glass-morphism dark:glass-morphism-dark px-4 py-3 rounded-2xl flex items-center gap-3 shadow-card"
+              >
+                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <Star size={14} className="text-emerald-600 fill-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-800 dark:text-white">Rated 4.9 / 5</p>
+                  <p className="text-xs text-slate-400">by 5,000+ merchants</p>
+                </div>
+              </motion.div>
+
+              {/* Ambient glow behind image */}
+              <div className="blob-primary w-72 h-72 -bottom-10 right-0 opacity-40" />
             </motion.div>
           </div>
         </div>
       </section>
 
-
-      
-      {/* Featured Products */}
-      <section className="py-24 bg-surface-variant dark:bg-dark-surface-variant/20 relative">
+      {/* ── Featured Systems Strip ─────────────────────── */}
+      <section className="py-16 border-y border-slate-200/60 dark:border-white/5 bg-white/40 dark:bg-slate-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-16 space-y-4 md:space-y-0 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
             <div>
-              <h2 className="text-4xl font-bold dark:text-white text-on-surface mb-4">Top POS Systems</h2>
-              <p className="text-on-surface-variant dark:text-dark-on-surface-variant max-w-xl font-medium">Choose from our curated selection of industry-leading hardware designed for every business environment.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Smart Payment Hardware</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Featured Point of Sale Terminals</h2>
             </div>
-            <Link to="/contact" className="text-primary font-bold flex items-center space-x-2 hover:translate-x-2 transition-transform">
-              <span>Get Custom Quote</span>
-              <ArrowRight size={20} />
+            <Link to="/services" className="btn-primary py-2.5 px-5 text-xs font-bold shrink-0">
+              View All Systems →
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {topProducts.map((product, index) => (
-              <ProductCard key={index} {...product} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Station Duo Countertop POS',
+                tag: 'Dual-Screen POS',
+                desc: '14" staff touchscreen + 8" customer display for seamless orders and tipping.',
+                slug: 'clover-station-duo',
+                img: '/images/clover-station-duo.jpg'
+              },
+              {
+                title: 'Go Wireless Smart Terminal',
+                tag: 'Wireless 4G LTE',
+                desc: 'Canada’s benchmark Android terminal with instant Interac debit and all-day battery.',
+                slug: 'moneris-go-terminal',
+                img: '/images/moneris-go-terminal.jpg'
+              },
+              {
+                title: 'Cloud Restaurant POS & KDS',
+                tag: 'Hospitality Cloud',
+                desc: 'Table mapping, kitchen display systems (KDS), and commission-free online ordering.',
+                slug: 'heartland-restaurant-pos',
+                img: '/images/heartland-restaurant-pos.jpg'
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="pos-card p-6 flex flex-col justify-between group hover:border-blue-300 dark:hover:border-blue-500/30">
+                <div>
+                  <div className="aspect-[16/10] rounded-xl bg-slate-100 dark:bg-slate-800 p-3 mb-4 flex items-center justify-center overflow-hidden">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+                  </div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 rounded-md">{item.tag}</span>
+                    <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Next-Day Setup</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">{item.desc}</p>
+                </div>
+                <Link
+                  to={`/services/${item.slug}`}
+                  className="mt-5 text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5 hover:gap-2.5 transition-all"
+                >
+                  <span>Explore Specs & Pricing</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-24 relative overflow-hidden bg-surface dark:bg-dark-surface">
+      {/* ── Official Technology Partners Component ─────── */}
+      <Partners />
+
+      {/* ── Feature Strip ─────────────────────────────── */}
+      <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold dark:text-white text-on-surface mb-6">Built for Success, Designed for Growth</h2>
-            <div className="w-24 h-1.5 bg-primary mx-auto mb-8 rounded-full" />
+          <div className="text-center mb-14">
+            <p className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400 mb-3">
+              Why MHPOS
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">
+              Built for Success, Designed for Growth
+            </h2>
+            <div className="section-divider mx-auto mt-5" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center space-y-6"
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: index * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="pos-card p-8 text-center group hover:shadow-lift transition-shadow duration-300"
               >
-                <div className="w-20 h-20 bg-primary/10 rounded-[24px] flex items-center justify-center text-primary mx-auto">
-                  <feature.icon size={40} />
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(37,99,235,0.10) 0%, rgba(79,70,229,0.10) 100%)',
+                    color: '#2563EB',
+                  }}
+                >
+                  <feature.icon size={32} />
                 </div>
-                <h3 className="text-2xl font-bold dark:text-white text-on-surface">{feature.title}</h3>
-                <p className="text-on-surface-variant dark:text-dark-on-surface-variant leading-relaxed font-medium">{feature.desc}</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-morphism dark:glass-morphism-dark p-12 lg:p-20 rounded-[4rem] text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[150px] -z-10" />
-            <h2 className="text-4xl lg:text-6xl font-bold mb-8 dark:text-white">Ready to upgrade your system?</h2>
-            <p className="text-xl text-gray-500 mb-12 max-w-2xl mx-auto italic">
-              "Joining MHPOS was the best decision for my bakery. The setup was seamless and the support is unmatched." - Sarah, Toronto
-            </p>
-            <div className="flex flex-col sm:row items-center justify-center gap-6">
-              <Link to="/contact" className="btn-primary text-lg px-12 py-5">
-                Contact Our Experts
-              </Link>
-              <Link to="/contact" className="text-gray-400 font-bold hover:text-white">
-                Learn more about pricing →
-              </Link>
-            </div>
-            <div className="mt-16 flex flex-wrap justify-center gap-12 opacity-30 grayscale">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-8" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-10" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Interac_logo.svg" alt="Interac" className="h-8" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" alt="Apple Pay" className="h-8" />
+      {/* ── CTA Banner ───────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div
+            className="relative overflow-hidden rounded-[3rem] p-12 lg:p-20 text-center"
+            style={{
+              background: 'linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 40%, #4F46E5 100%)',
+            }}
+          >
+            {/* Ambient overlays */}
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20"
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%)', filter: 'blur(40px)' }}
+            />
+            <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-15"
+              style={{ background: 'radial-gradient(circle, rgba(16,163,74,0.4) 0%, transparent 70%)', filter: 'blur(60px)' }}
+            />
+
+            <div className="relative z-10">
+              <p className="text-sm font-bold uppercase tracking-[0.15em] text-blue-200 mb-4">Trusted by 5,000+ merchants</p>
+              <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                Ready to upgrade your system?
+              </h2>
+              <p className="text-lg text-blue-100/80 mb-10 max-w-xl mx-auto italic leading-relaxed">
+                "Joining MHPOS was the best decision for my bakery. The setup was seamless and the support is unmatched."
+                <span className="not-italic font-semibold text-white"> — Sarah, Toronto</span>
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/contact" className="btn-emerald text-base px-10 py-4">
+                  Contact Our Experts
+                </Link>
+                <Link to="/contact" className="text-blue-200 font-semibold hover:text-white transition-colors">
+                  Learn about pricing →
+                </Link>
+              </div>
+
+              {/* Payment logos */}
+              <div className="mt-14 flex flex-wrap justify-center gap-10 opacity-40">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-6 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-8 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Interac_logo.svg" alt="Interac" className="h-6 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" alt="Apple Pay" className="h-6 brightness-0 invert" />
+              </div>
             </div>
           </div>
         </div>
