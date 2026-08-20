@@ -363,74 +363,7 @@ const Home = () => {
       {/* ══════════════════════════════════════════════════
           CTA BANNER
          ══════════════════════════════════════════════════ */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div
-            className="relative overflow-hidden rounded-[3rem] p-12 lg:p-20 text-center"
-            style={{
-              background: 'linear-gradient(135deg, #3B0FBF 0%, #4A2FE0 30%, #2C64F7 65%, #00A8CC 100%)',
-              boxShadow: '0 32px 80px rgba(108,58,255,0.40), 0 8px 32px rgba(0,0,0,0.20)',
-            }}
-          >
-            {/* Inner highlights */}
-            <div
-              className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 70%)', filter: 'blur(50px)' }}
-            />
-            <div
-              className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-25 pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(0,232,136,0.50) 0%, transparent 70%)', filter: 'blur(60px)' }}
-            />
-            {/* Dot pattern */}
-            <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
-
-            <div className="relative z-10">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-200 mb-4">
-                Trusted by 5,000+ merchants
-              </p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                Ready to upgrade your system?
-              </h2>
-              <p className="text-lg text-violet-100/80 mb-4 max-w-xl mx-auto italic leading-relaxed">
-                "Joining MHPOS was the best decision for my bakery. The setup was seamless and the support is unmatched."
-                <span className="not-italic font-semibold text-white"> — Sarah, Toronto</span>
-              </p>
-
-              {/* Checklist */}
-              <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-10 text-sm text-white/80">
-                {['No contracts', 'Free setup', 'Next-day funding', '24/7 support'].map(item => (
-                  <div key={item} className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/contact" className="btn-emerald text-base px-10 py-4">
-                  Contact Our Experts
-                  <ArrowRight size={18} />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="text-violet-200 font-semibold hover:text-white transition-colors flex items-center gap-1.5"
-                >
-                  Learn about pricing
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-
-              {/* Payment logos */}
-              <div className="mt-14 flex flex-wrap justify-center gap-10 opacity-35">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"      alt="Visa"       className="h-6 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"     alt="Mastercard" className="h-8 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Interac_logo.svg"        alt="Interac"    className="h-6 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg"      alt="Apple Pay"  className="h-6 brightness-0 invert" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
     </div>
   );
