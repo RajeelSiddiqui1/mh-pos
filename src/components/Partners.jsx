@@ -72,17 +72,18 @@ const Partners = ({ subtitle = "We partner directly with leading payment network
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/70 dark:border-blue-800/40 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+          <div className="badge-violet inline-flex items-center gap-2 mb-5">
             <ShieldCheck size={16} />
             <span>Official Strategic Technology Partners</span>
           </div>
-          
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight">
-            Backed by Industry <br />
-            <span className="text-gradient-blue">Payment Giants</span>
+
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white tracking-tight">
+            Backed by Industry{' '}
+            <br />
+            <span className="text-gradient">Payment Giants</span>
           </h2>
-          
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
+
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-4 leading-relaxed">
             {subtitle}
           </p>
         </div>
@@ -97,7 +98,7 @@ const Partners = ({ subtitle = "We partner directly with leading payment network
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.45 }}
               whileHover={{ y: -6 }}
-              className="pos-card overflow-hidden flex flex-col justify-between group hover:shadow-lift transition-all"
+              className="glow-card overflow-hidden flex flex-col justify-between"
             >
               <div>
                 {/* Visual Image with Badge */}
@@ -150,11 +151,26 @@ const Partners = ({ subtitle = "We partner directly with leading payment network
                 </div>
               </div>
 
-              {/* Card Footer CTA */}
               <div className="p-6 pt-0">
                 <Link
                   to="/services"
-                  className="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center gap-1.5 transition-all duration-200"
+                  className="w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all duration-200 text-violet-700 dark:text-violet-300 hover:text-white"
+                  style={{
+                    background: 'rgba(108,58,255,0.06)',
+                    border:     '1px solid rgba(108,58,255,0.18)',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background  = 'linear-gradient(135deg, #6C3AFF, #2C64F7)';
+                    e.currentTarget.style.border      = '1px solid transparent';
+                    e.currentTarget.style.boxShadow   = '0 4px 16px rgba(108,58,255,0.35)';
+                    e.currentTarget.style.color       = 'white';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background  = 'rgba(108,58,255,0.06)';
+                    e.currentTarget.style.border      = '1px solid rgba(108,58,255,0.18)';
+                    e.currentTarget.style.boxShadow   = '';
+                    e.currentTarget.style.color       = '';
+                  }}
                 >
                   <span>Explore {partner.name} Systems</span>
                   <ArrowRight size={13} />

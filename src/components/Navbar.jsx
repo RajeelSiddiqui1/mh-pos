@@ -1,57 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Zap } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
+  { name: 'Home',     path: '/' },
   { name: 'Services', path: '/services' },
   { name: 'About Us', path: '/about' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Contact',  path: '/contact' },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen,    setIsOpen]    = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
   const { darkMode, toggleTheme } = useTheme();
-  const location = useLocation();
+  const location                  = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 18);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav className="fixed w-full z-50 top-0 left-0 glass-morphism dark:glass-morphism-dark">
+    <nav
+      className={`fixed w-full z-50 top-0 left-0 transition-all duration-400 ${
+        scrolled
+          ? 'glass-strong shadow-lift'
+          : 'glass'
+      }`}
+    >
+      {/* Top glow line */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2.5 shrink-0">
+        <div className="flex justify-between h-[72px] items-center">
+
+          {/* ── Logo ── */}
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-white text-lg"
-              style={{ background: 'linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)' }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-white text-lg shadow-md transition-shadow duration-300 group-hover:shadow-lg"
+              style={{
+                background: 'linear-gradient(135deg, #6C3AFF 0%, #2C64F7 100%)',
+                boxShadow:  '0 4px 16px rgba(108,58,255,0.45)',
+              }}
             >
-              M
+              <Zap size={18} className="fill-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-              MHPOS<span className="text-blue-600">.</span>
+            <span className="font-display text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+              MH<span className="text-gradient">POS</span>
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#6C3AFF,#00D4FF)' }}
+              >.</span>
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-1">
+          {/* ── Desktop Nav ── */}
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 ${
+                  className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-200 ${
                     isActive
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400'
+                      ? 'text-violet-600 dark:text-violet-400'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400'
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-blue-50 dark:bg-blue-500/10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(108,58,255,0.10), rgba(44,100,247,0.08))',
+                        border: '1px solid rgba(108,58,255,0.18)',
+                      }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 34 }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
@@ -60,41 +88,41 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Right Controls */}
-          <div className="hidden md:flex items-center space-x-3 border-l border-slate-200 dark:border-white/10 pl-5">
+          {/* ── Right Controls ── */}
+          <div className="hidden md:flex items-center gap-3 pl-5 border-l border-violet-100 dark:border-violet-900/40">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/8 transition-all"
+              className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-violet-50 dark:hover:bg-violet-900/20 hover:text-violet-600 dark:hover:text-violet-400 transition-all duration-200"
               aria-label="Toggle theme"
             >
               {darkMode ? <Sun size={19} /> : <Moon size={19} />}
             </button>
-            <Link to="/contact" className="btn-primary py-2 px-5 text-sm">
+            <Link to="/contact" className="btn-primary py-2.5 px-5 text-sm">
               Get a Quote
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          {/* ── Mobile Controls ── */}
+          <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-slate-600 dark:text-slate-300"
+              className="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-colors"
               aria-label="Toggle theme"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-slate-700 dark:text-white"
+              className="p-2 rounded-xl text-slate-700 dark:text-white hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={26} /> : <Menu size={26} />}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Nav Dropdown */}
+      {/* ── Mobile Dropdown ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -102,7 +130,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden glass-morphism dark:glass-morphism-dark border-t border-slate-100 dark:border-white/8"
+            className="md:hidden overflow-hidden glass-strong border-t border-violet-100/60 dark:border-violet-900/30"
           >
             <div className="px-4 pt-3 pb-6 space-y-1">
               {navLinks.map((link) => {
@@ -112,10 +140,10 @@ const Navbar = () => {
                     key={link.name}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3.5 text-sm font-semibold rounded-xl transition-all ${
+                    className={`block px-4 py-3 text-sm font-semibold rounded-2xl transition-all ${
                       isActive
-                        ? 'text-blue-600 bg-blue-50 dark:bg-blue-500/10 dark:text-blue-400'
-                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
+                        ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800/30'
+                        : 'text-slate-600 dark:text-slate-300 hover:bg-violet-50/60 dark:hover:bg-violet-900/10'
                     }`}
                   >
                     {link.name}

@@ -23,7 +23,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <ScrollToTop />
-        <div className="min-h-screen transition-colors duration-500 dark:bg-slate-950 bg-transparent text-slate-900 dark:text-slate-100">
+        <div className="min-h-screen transition-colors duration-500 page-bg text-slate-900 dark:text-slate-100">
           <Navbar />
           <main>
             <Routes>

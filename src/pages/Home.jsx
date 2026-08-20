@@ -1,17 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Globe, ArrowRight, Play, Star, Sparkles } from 'lucide-react';
+import { Shield, Zap, Globe, ArrowRight, Play, Star, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Partners from '../components/Partners';
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.10 } },
 };
-
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  hidden:  { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const Home = () => {
@@ -19,39 +18,74 @@ const Home = () => {
     {
       icon: Zap,
       title: 'High Performance',
-      desc: 'Ultra-low latency processing ensures your checkout lines never slow down.',
+      desc:  'Ultra-low latency processing ensures your checkout lines never slow down.',
+      color: '#6C3AFF',
+      glow:  'rgba(108,58,255,0.25)',
     },
     {
       icon: Shield,
       title: 'Bank-Grade Security',
-      desc: 'Every transaction is encrypted with the latest industry standards to protect your data.',
+      desc:  'Every transaction is encrypted with the latest industry standards to protect your data.',
+      color: '#00D4FF',
+      glow:  'rgba(0,212,255,0.20)',
     },
     {
       icon: Globe,
       title: 'Born in Canada',
-      desc: 'Headquartered in Toronto, we understand local tax compliance and regulations.',
+      desc:  'Headquartered in Toronto, we understand local tax compliance and regulations.',
+      color: '#00E888',
+      glow:  'rgba(0,232,136,0.20)',
     },
   ];
 
   const stats = [
     { value: '5,000+', label: 'Active Merchants' },
-    { value: '99.9%', label: 'Uptime SLA' },
+    { value: '99.9%',  label: 'Uptime SLA' },
     { value: '< 0.3s', label: 'Avg. Transaction' },
   ];
 
+  const terminals = [
+    {
+      title: 'Station Duo Countertop POS',
+      tag:   'Dual-Screen POS',
+      desc:  '14″ staff touchscreen + 8″ customer display for seamless orders and tipping.',
+      slug:  'clover-station-duo',
+      img:   '/images/clover-station-duo.jpg',
+    },
+    {
+      title: 'Go Wireless Smart Terminal',
+      tag:   'Wireless 4G LTE',
+      desc:  "Canada's benchmark Android terminal with instant Interac debit and all-day battery.",
+      slug:  'moneris-go-terminal',
+      img:   '/images/moneris-go-terminal.jpg',
+    },
+    {
+      title: 'Cloud Restaurant POS & KDS',
+      tag:   'Hospitality Cloud',
+      desc:  'Table mapping, kitchen display systems (KDS), and commission-free online ordering.',
+      slug:  'heartland-restaurant-pos',
+      img:   '/images/heartland-restaurant-pos.jpg',
+    },
+  ];
+
   return (
-    <div className="pt-20 overflow-hidden">
+    <div className="page-bg overflow-hidden">
 
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section className="relative py-24 lg:py-36">
-        {/* Ambient blobs */}
-        <div className="blob-primary w-[560px] h-[560px] -top-20 left-1/4 opacity-60" />
-        <div className="blob-indigo w-[400px] h-[400px] top-40 right-0 opacity-50" />
+      {/* ══════════════════════════════════════════════════
+          HERO
+         ══════════════════════════════════════════════════ */}
+      <section className="relative min-h-screen flex items-center pt-20">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Aurora background */}
+        <div className="aurora-bg" />
+
+        {/* Dot grid */}
+        <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
           <div className="flex flex-col lg:flex-row items-center gap-16">
 
-            {/* Left — Copy */}
+            {/* ── Left Copy ── */}
             <motion.div
               variants={stagger}
               initial="hidden"
@@ -59,9 +93,12 @@ const Home = () => {
               className="flex-1 space-y-8 text-center lg:text-left"
             >
               {/* Badge */}
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism dark:glass-morphism-dark">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
-                <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+              <motion.div variants={fadeUp}>
+                <span className="badge-violet">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-500" />
+                  </span>
                   Serving Canadian Businesses Coast to Coast
                 </span>
               </motion.div>
@@ -69,13 +106,13 @@ const Home = () => {
               {/* Headline */}
               <motion.h1
                 variants={fadeUp}
-                className="text-5xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white"
+                className="font-display text-5xl lg:text-7xl font-bold leading-[1.06] tracking-tight text-slate-900 dark:text-white"
               >
                 Next-Generation
                 <br />
-                <span className="text-gradient-blue">POS Solutions</span>
+                <span className="text-gradient">POS Solutions</span>
                 <br />
-                for Small Business.
+                <span className="text-slate-700 dark:text-slate-200">for Small Business.</span>
               </motion.h1>
 
               {/* Subtext */}
@@ -83,7 +120,8 @@ const Home = () => {
                 variants={fadeUp}
                 className="text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed mx-auto lg:mx-0"
               >
-                Streamline your operations with our robust, secure, and modern payment terminals — designed for the evolving retail landscape.
+                Streamline your operations with our robust, secure, and modern payment terminals —
+                designed for the evolving retail landscape.
               </motion.p>
 
               {/* CTAs */}
@@ -101,28 +139,37 @@ const Home = () => {
                 </Link>
               </motion.div>
 
-              {/* Stats row */}
+              {/* Stats */}
               <motion.div
                 variants={fadeUp}
                 className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-2"
               >
                 {stats.map(({ value, label }) => (
                   <div key={label} className="text-center lg:text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{value}</p>
+                    <p className="font-display text-2xl font-bold text-gradient">{value}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{label}</p>
                   </div>
                 ))}
               </motion.div>
             </motion.div>
 
-            {/* Right — Hero Image */}
+            {/* ── Right — Hero Image ── */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, type: 'spring', stiffness: 80 }}
+              initial={{ opacity: 0, scale: 0.88, y: 20 }}
+              animate={{ opacity: 1, scale: 1,    y: 0  }}
+              transition={{ duration: 0.8, type: 'spring', stiffness: 70 }}
               className="flex-1 relative max-w-lg w-full"
             >
-              <div className="animate-float pos-card p-4 rounded-[2.5rem] shadow-lift">
+              {/* Outer glow ring */}
+              <div
+                className="absolute -inset-4 rounded-[2.8rem] opacity-40 blur-xl"
+                style={{ background: 'linear-gradient(135deg, rgba(108,58,255,0.40), rgba(0,212,255,0.25))' }}
+              />
+
+              <div
+                className="relative animate-float pos-card p-4 rounded-[2.5rem]"
+                style={{ boxShadow: '0 24px 80px rgba(108,58,255,0.25), 0 8px 32px rgba(0,0,0,0.12)' }}
+              >
                 <img
                   src="/images/clover-station-duo.jpg"
                   alt="POS Terminal"
@@ -132,13 +179,17 @@ const Home = () => {
 
               {/* Floating trust badge */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0  }}
                 transition={{ delay: 0.9, duration: 0.5 }}
-                className="absolute -bottom-5 -left-6 glass-morphism dark:glass-morphism-dark px-4 py-3 rounded-2xl flex items-center gap-3 shadow-card"
+                className="absolute -bottom-5 -left-6 glass px-4 py-3 rounded-2xl flex items-center gap-3"
+                style={{ boxShadow: '0 8px 32px rgba(108,58,255,0.18)' }}
               >
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <Star size={14} className="text-emerald-600 fill-emerald-600" />
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, rgba(0,232,136,0.20), rgba(0,212,255,0.15))', border: '1px solid rgba(0,232,136,0.30)' }}
+                >
+                  <Star size={15} className="text-emerald-500 fill-emerald-500" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-800 dark:text-white">Rated 4.9 / 5</p>
@@ -146,165 +197,241 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Ambient glow behind image */}
-              <div className="blob-primary w-72 h-72 -bottom-10 right-0 opacity-40" />
+              {/* Live badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1,  y: 0  }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                className="absolute -top-4 -right-4 glass px-3 py-2 rounded-xl flex items-center gap-2"
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-xs font-bold text-slate-800 dark:text-white">Live Processing</span>
+              </motion.div>
             </motion.div>
           </div>
         </div>
-      </section>
 
-      {/* ── Featured Systems Strip ─────────────────────── */}
-      <section className="py-16 border-y border-slate-200/60 dark:border-white/5 bg-white/40 dark:bg-slate-900/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Smart Payment Hardware</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Featured Point of Sale Terminals</h2>
-            </div>
-            <Link to="/services" className="btn-primary py-2.5 px-5 text-xs font-bold shrink-0">
-              View All Systems →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'Station Duo Countertop POS',
-                tag: 'Dual-Screen POS',
-                desc: '14" staff touchscreen + 8" customer display for seamless orders and tipping.',
-                slug: 'clover-station-duo',
-                img: '/images/clover-station-duo.jpg'
-              },
-              {
-                title: 'Go Wireless Smart Terminal',
-                tag: 'Wireless 4G LTE',
-                desc: 'Canada’s benchmark Android terminal with instant Interac debit and all-day battery.',
-                slug: 'moneris-go-terminal',
-                img: '/images/moneris-go-terminal.jpg'
-              },
-              {
-                title: 'Cloud Restaurant POS & KDS',
-                tag: 'Hospitality Cloud',
-                desc: 'Table mapping, kitchen display systems (KDS), and commission-free online ordering.',
-                slug: 'heartland-restaurant-pos',
-                img: '/images/heartland-restaurant-pos.jpg'
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="pos-card p-6 flex flex-col justify-between group hover:border-blue-300 dark:hover:border-blue-500/30">
-                <div>
-                  <div className="aspect-[16/10] rounded-xl bg-slate-100 dark:bg-slate-800 p-3 mb-4 flex items-center justify-center overflow-hidden">
-                    <img src={item.img} alt={item.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
-                  </div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 rounded-md">{item.tag}</span>
-                    <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Next-Day Setup</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">{item.desc}</p>
-                </div>
-                <Link
-                  to={`/services/${item.slug}`}
-                  className="mt-5 text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5 hover:gap-2.5 transition-all"
-                >
-                  <span>Explore Specs & Pricing</span>
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-            ))}
-          </div>
+        {/* Wave divider */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none">
+          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M0 40 C360 80 1080 0 1440 40 L1440 80 L0 80 Z" fill="rgba(108,58,255,0.04)" />
+          </svg>
         </div>
       </section>
 
-      {/* ── Official Technology Partners Component ─────── */}
-      <Partners />
 
-      {/* ── Feature Strip ─────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════
+          FEATURED TERMINALS
+         ══════════════════════════════════════════════════ */}
       <section className="py-24 relative">
+        <div className="blob-primary w-96 h-96 top-0 right-10 opacity-25" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400 mb-3">
-              Why MHPOS
-            </p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">
-              Built for Success, Designed for Growth
-            </h2>
-            <div className="section-divider mx-auto mt-5" />
+          {/* Section header */}
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-14">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-600 dark:text-violet-400 mb-2">
+                Smart Payment Hardware
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                Featured{' '}
+                <span className="text-gradient-blue">POS Terminals</span>
+              </h2>
+              <div className="section-divider mt-4" />
+            </div>
+            <Link to="/services" className="btn-primary py-2.5 px-6 text-sm shrink-0">
+              View All Systems <ArrowRight size={14} />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {terminals.map((item, idx) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 28 }}
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: index * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="pos-card p-8 text-center group hover:shadow-lift transition-shadow duration-300"
+                transition={{ delay: idx * 0.10, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="glow-card flex flex-col justify-between"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(37,99,235,0.10) 0%, rgba(79,70,229,0.10) 100%)',
-                    color: '#2563EB',
-                  }}
-                >
-                  <feature.icon size={32} />
+                {/* Image */}
+                <div className="relative aspect-[16/10] rounded-t-[22px] overflow-hidden bg-gradient-to-br from-slate-50 via-violet-50/30 to-blue-50/20 dark:from-slate-900 dark:via-violet-950/20 dark:to-slate-900 p-4 flex items-center justify-center">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Tag */}
+                  <div className="absolute top-3 left-3">
+                    <span
+                      className="px-3 py-1 text-[11px] font-bold rounded-full text-white"
+                      style={{ background: 'linear-gradient(135deg, #6C3AFF, #2C64F7)', boxShadow: '0 4px 12px rgba(108,58,255,0.35)' }}
+                    >
+                      {item.tag}
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2.5 py-1 text-[11px] font-bold rounded-full text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/30">
+                      Next-Day Setup
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{feature.desc}</p>
+
+                {/* Content */}
+                <div className="relative z-10 p-6 flex flex-col flex-1">
+                  <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 mb-5">
+                    {item.desc}
+                  </p>
+                  <Link
+                    to={`/services/${item.slug}`}
+                    className="mt-auto flex items-center gap-2 text-sm font-bold text-violet-600 dark:text-violet-400 hover:gap-3 transition-all duration-200 group"
+                  >
+                    <span>Explore Specs & Pricing</span>
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA Banner ───────────────────────────────── */}
+
+      {/* ══════════════════════════════════════════════════
+          PARTNERS
+         ══════════════════════════════════════════════════ */}
+      <Partners />
+
+
+      {/* ══════════════════════════════════════════════════
+          FEATURES
+         ══════════════════════════════════════════════════ */}
+      <section className="py-28 relative">
+        <div className="blob-emerald w-80 h-80 bottom-0 left-0 opacity-20" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section header */}
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-600 dark:text-violet-400 mb-3">
+              Why MHPOS
+            </p>
+            <h2 className="font-display text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+              Built for{' '}
+              <span className="text-gradient">Success</span>
+              {', Designed for '}
+              <span className="text-gradient-cyan">Growth</span>
+            </h2>
+            <div className="section-divider mx-auto mt-5" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {features.map((feature, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: idx * 0.12, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="glow-card p-8 text-center flex flex-col items-center"
+              >
+                {/* Neumorphic icon */}
+                <div
+                  className="neu-icon w-18 h-18 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110"
+                  style={{ width: 72, height: 72, color: feature.color }}
+                >
+                  <feature.icon size={34} />
+                </div>
+                <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════════════════════
+          CTA BANNER
+         ══════════════════════════════════════════════════ */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div
             className="relative overflow-hidden rounded-[3rem] p-12 lg:p-20 text-center"
             style={{
-              background: 'linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 40%, #4F46E5 100%)',
+              background: 'linear-gradient(135deg, #3B0FBF 0%, #4A2FE0 30%, #2C64F7 65%, #00A8CC 100%)',
+              boxShadow: '0 32px 80px rgba(108,58,255,0.40), 0 8px 32px rgba(0,0,0,0.20)',
             }}
           >
-            {/* Ambient overlays */}
-            <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20"
-              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%)', filter: 'blur(40px)' }}
+            {/* Inner highlights */}
+            <div
+              className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 pointer-events-none"
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 70%)', filter: 'blur(50px)' }}
             />
-            <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-15"
-              style={{ background: 'radial-gradient(circle, rgba(16,163,74,0.4) 0%, transparent 70%)', filter: 'blur(60px)' }}
+            <div
+              className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-25 pointer-events-none"
+              style={{ background: 'radial-gradient(circle, rgba(0,232,136,0.50) 0%, transparent 70%)', filter: 'blur(60px)' }}
             />
+            {/* Dot pattern */}
+            <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
 
             <div className="relative z-10">
-              <p className="text-sm font-bold uppercase tracking-[0.15em] text-blue-200 mb-4">Trusted by 5,000+ merchants</p>
-              <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-200 mb-4">
+                Trusted by 5,000+ merchants
+              </p>
+              <h2 className="font-display text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                 Ready to upgrade your system?
               </h2>
-              <p className="text-lg text-blue-100/80 mb-10 max-w-xl mx-auto italic leading-relaxed">
+              <p className="text-lg text-violet-100/80 mb-4 max-w-xl mx-auto italic leading-relaxed">
                 "Joining MHPOS was the best decision for my bakery. The setup was seamless and the support is unmatched."
                 <span className="not-italic font-semibold text-white"> — Sarah, Toronto</span>
               </p>
 
+              {/* Checklist */}
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-10 text-sm text-white/80">
+                {['No contracts', 'Free setup', 'Next-day funding', '24/7 support'].map(item => (
+                  <div key={item} className="flex items-center gap-2">
+                    <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/contact" className="btn-emerald text-base px-10 py-4">
                   Contact Our Experts
+                  <ArrowRight size={18} />
                 </Link>
-                <Link to="/contact" className="text-blue-200 font-semibold hover:text-white transition-colors">
-                  Learn about pricing →
+                <Link
+                  to="/contact"
+                  className="text-violet-200 font-semibold hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  Learn about pricing
+                  <ArrowRight size={14} />
                 </Link>
               </div>
 
               {/* Payment logos */}
-              <div className="mt-14 flex flex-wrap justify-center gap-10 opacity-40">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-6 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-8 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Interac_logo.svg" alt="Interac" className="h-6 brightness-0 invert" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" alt="Apple Pay" className="h-6 brightness-0 invert" />
+              <div className="mt-14 flex flex-wrap justify-center gap-10 opacity-35">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"      alt="Visa"       className="h-6 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"     alt="Mastercard" className="h-8 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Interac_logo.svg"        alt="Interac"    className="h-6 brightness-0 invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg"      alt="Apple Pay"  className="h-6 brightness-0 invert" />
               </div>
             </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 };
